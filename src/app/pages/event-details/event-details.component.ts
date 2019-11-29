@@ -110,12 +110,4 @@ export class EventDetailsComponent implements OnInit{
       this.showModal = false;
     })
   }
-
-  // open(content) {
-  //   this.modalService.open(content, this.modalOptions).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
 }
