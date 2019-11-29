@@ -1,89 +1,96 @@
 <div class="col-md-12">
     <div class="card card-user">
       <div class="card-header">
-        <h5 class="card-title">Shto event/emergjence</h5>
+        <h5 class="card-title">Raporto nje event ose emergjence</h5>
       </div>
-      <div class="card-body">
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>Tipi i emergjences</label>
-                <select class="form-control" [(ngModel)]="payload.type">
-                  <option value="1">Termet</option>
-                  <option value="2">Zjarr</option>
-                  <option value="3">Permbytje</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>Shkalla e rrezikshmerise</label>
-                <select class="form-control" [(ngModel)]="payload.severity">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>Data</label>
-                <input type="date" class="form-control" [(ngModel)]="payload.time">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>Qyteti</label>
-                <input type="text" class="form-control" placeholder="Durres, Prishtine, etj..." [(ngModel)]="payload.city">
-              </div>
-            </div>
-            <div class="col-md-6 px-1">
-              <div class="form-group">
-                <label>Shteti</label>
-                <input type="text" class="form-control" placeholder="Shqiperi, Kosove, etj..." [(ngModel)]="payload.country">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Ju lutem jepni nje pershkrim te shkurter per kete event</label>
-                <textarea [(ngModel)]="payload.description" class="form-control textarea" placeholder="Sapo ka ndodhur nje termet i shkalles se larte ne Durres...."></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-md-12">
-                <div class="card ">
-                  <div class="card-header ">
-                    Ku ndodhet streha?
+      <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
+          <div class="card-body">
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Tipi i emergjences</label>
+                    <select class="form-control" formControlName="type">
+                      <option value="1">Termet</option>
+                      <option value="2">Zjarr</option>
+                      <option value="3">Permbytje</option>
+                    </select>
                   </div>
-                  <div class="card-body ">
-                    <div id="map" class="map">
-                      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
-                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-                      </agm-map>
-                    </div>
+                </div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Shkalla e rrezikshmerise</label>
+                    <select class="form-control" formControlName="severity">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Data</label>
+                    <input type="date" class="form-control" formControlName="time">
                   </div>
                 </div>
               </div>
-            </div>
-
-          <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round" (click)="addEvent()">Shto event</button>
-            </div>
+              <div class="row">
+                <div class="col-md-6 pr-1">
+                  <div class="form-group">
+                    <label>Qyteti</label>
+                    <input type="text" class="form-control" placeholder="Durres, Prishtine, etj..." formControlName="city">
+                  </div>
+                </div>
+                <div class="col-md-6 px-1">
+                  <div class="form-group">
+                    <label>Shteti</label>
+                    <input type="text" class="form-control" placeholder="Shqiperi, Kosove, etj..." formControlName="country">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Ju lutem jepni nje pershkrim te shkurter per kete event</label>
+                    <textarea formControlName="description" class="form-control textarea" placeholder="Sapo ka ndodhur nje termet i shkalles se larte ne Durres...."></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="card ">
+                      <div class="card-header ">
+                        Ku ndodhet streha?
+                      </div>
+                      <div class="card-body ">
+                        <div id="map" class="map">
+                          <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                          </agm-map>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+              <div class="row">
+                <div class="update ml-auto mr-auto">
+                  <span *ngIf="reportForm.invalid" class="text-danger">Ju duhet te plotesoni te gjitha fushat per te raportuar nje event ose emergjence</span>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="update ml-auto mr-auto">
+                      <button type="submit" [disabled]="reportForm.invalid" class="btn btn-primary btn-round">Shto event</button>
+                  </div>
+                </div>
           </div>
-      </div>
+      </form>
     </div>
 </div>
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -25,6 +25,7 @@ import { EventCreateComponent } from 'app/pages/event-create/event-create.compon
       apiKey: 'AIzaSyAYZGue7QIrxD7ep8zWPSVXNvcCMCg8Lyw'
     }),
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   declarations: [
