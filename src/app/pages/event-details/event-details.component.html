@@ -1,0 +1,199 @@
+
+<div class="row" *ngIf="event">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="image">
+        <!-- <img src="assets/img/quake.jpeg" alt="..."> -->
+      </div>
+      <div class="card-body">
+        <div class="author">
+            <h2 class="title">
+              {{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}}
+            </h2>
+            <h5>
+              {{event.city}}, {{event.country}}
+            </h5>
+        </div>
+        <p class="description text-center">
+          {{event.description}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <hr>
+        <div class="button-container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-6 ml-auto" (click)="getSafetyZones()">
+              <h5>{{event.totalSafeZones}}
+                <br>
+                <small>Pika grumbullimi</small>
+              </h5>
+            </div>
+            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto" (click)="getShelters()">
+              <h5>{{event.totalShelters}}
+                <br>
+                <small>Strehime</small>
+              </h5>
+            </div>
+            <div class="col-lg-3 mr-auto" (click)="getSupplies()">
+              <h5>{{event.totalSupplies}}
+                <br>
+                <small>Ndihmesa/Ushqime</small>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="showShelters || showSafetyZones">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" *ngIf="showShelters"> Lista e banesave ne dispozicion</h4>
+        <h4 class="card-title" *ngIf="showSafetyZones"> Lista e zonave te sigurta</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Emri
+              </th>
+              <th>
+                Qyteti, Shteti
+              </th>
+              <th>
+                Adresa
+              </th>
+              <th>
+                Pershkrimi
+              </th>
+              <th>
+                Kapaciteti
+              </th>
+              <th class="text-right">
+                Kontakti
+              </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let shelter of shelters">
+                  <td>
+                    {{shelter.name}}
+                  </td>
+                  <td>
+                    {{shelter.city}}, {{shelter.country}}
+                  </td>
+                  <td>
+                    {{shelter.address}}
+                  </td>
+                  <td>
+                      {{shelter.description}}
+                  </td>
+                  <td>
+                      {{shelter.capacity}} persona
+                    </td>
+                  <td class="text-right" (click)="showShelterContact(0)">
+                    - lista konktakteve - 
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="showSupplies">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Lista e vendeve ku grumbullohen/shperndahen ndihma</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Emri
+              </th>
+              <th>
+                Qyteti, Shteti
+              </th>
+              <th>
+                Adresa
+              </th>
+              <th>
+                Pershkrimi
+              </th>
+              <th>
+                Statusi
+              </th>
+              <th class="text-right">
+                Kontakti
+              </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let supply of supplies">
+                  <td>
+                    {{supply.name}}
+                  </td>
+                  <td>
+                    {{supply.city}}, {{supply.country}}
+                  </td>
+                  <td>
+                    {{supply.address}}
+                  </td>
+                  <td>
+                    {{supply.description}}
+                  </td>
+                  <td>
+                    {{supply.status}}
+                  </td>
+                  <td class="text-right" (click)="showShelterContact(supply.contactPersonId, mymodal)">
+                    <a>Kontakto</a> 
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!showSupplies && !showShelters && !showSafetyZones">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header ">
+        Ku ka ndodhur emergjenca?
+      </div>
+      <div class="card-body ">
+        <div id="map" class="map">
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{contactPerson.firstName}} {{contactPerson.lastName}}</h4>
+    </div>
+    <div class="modal-body">
+      <h4> Tel: {{contactPerson.phone}}  </h4>
+      <h4> Email: {{contactPerson.email}} </h4>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template>

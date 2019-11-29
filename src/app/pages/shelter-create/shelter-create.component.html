@@ -1,0 +1,115 @@
+<div class="col-md-12">
+    <div class="card card-user">
+      <!-- <div class="card-header"> -->
+        <!-- <h5 class="card-title">Shto strehe</h5> -->
+      <!-- </div> -->
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Hoteli/Shpia</label>
+                <input type="text" class="form-control" placeholder="Vendi">
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Adresa emailit address</label>
+                <input type="email" class="form-control"  placeholder="Adresa emailit">
+              </div>
+            </div>
+
+            <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Numri telefonit</label>
+                  <input type="text" class="form-control"  placeholder="+355...">
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label>Eventi</label>
+                <select class="form-control">
+                    <option value="event.id" *ngFor="let event of events">{{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}} - {{event.city}}, {{event.country}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Emri kontaktit</label>
+                <input type="text" class="form-control" placeholder="Emri">
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Mbiemri kontaktik</label>
+                <input type="text" class="form-control" placeholder="Mbiemri">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Adresa</label>
+                <input type="text" class="form-control" placeholder="Adresa e shtepise/hotelit">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Qyteti</label>
+                <input type="text" class="form-control" placeholder="Qyteti" value="Prishtine">
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Shteti</label>
+                <input type="text" class="form-control" placeholder="Qyteti" value="Kosove">
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Kodi Postar</label>
+                <input type="number" class="form-control" placeholder="Kodi Postar">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Rreth nesh</label>
+                <textarea class="form-control textarea">Nje pershkrim i shkurter ne lidhje me kete strehe..</textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                <div class="card ">
+                  <div class="card-header ">
+                    Ku ndodhet streha?
+                  </div>
+                  <div class="card-body ">
+                    <div id="map" class="map">
+                      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
+                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                      </agm-map>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round" (click)="addShelter()">Shto strehe</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+

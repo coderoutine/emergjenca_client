@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-lg-3col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-support-17 text-warning"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Te pa-verifikuara</p>
+              <p class="card-title">{{nonVerifiedEvents}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="col-lg-3col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-check-2 text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Te verifikuara</p>
+              <p class="card-title">{{verifiedEvents}}
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+      <h4 class="card-title"> List a emergjencave</h4>
+    </div>
+    <div class="col-md-6" *ngFor="let event of events" (click)="details(event.id)">
+      <div class="card card-user">
+        <div class="image">
+          <!-- <img src="assets/img/damir-bosnjak.jpg" alt="..."> -->
+        </div>
+        <div class="card-body">
+          <div class="author">
+              <img class="avatar border-gray" src="assets/img/earth-quake.png" *ngIf="event.type == 1 ">
+              <img class="avatar border-gray" src="assets/img/fire.png" *ngIf="event.type == 2 ">
+              <img class="avatar border-gray" src="assets/img/flood.png" *ngIf="event.type == 3 ">
+              <h5 class="title">{{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}}</h5>
+            <p class="description">
+                {{event.city}}, {{event.country}}
+            </p>
+          </div>
+          <p class="description text-center">
+            {{event.description}}
+          </p>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="button-container">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-4 ml-auto mr-auto">
+                  <h5>{{event.time | date: 'dd/MM/yyyy'}}</h5>
+              </div>
+              <div class="col-lg-8 col-md-8 col-8">
+                  <h5>{{event.verified ? 'Verifikuar' : 'Pa-verifikuar'}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
