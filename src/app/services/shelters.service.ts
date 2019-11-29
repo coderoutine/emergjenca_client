@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { QueryFlattenerService } from './query-flattener.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BaseService } from './service.base';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SheltersService {
-  _apiUrl: string = "https://localhost:5001/api/shelters";
+export class SheltersService extends BaseService {
 
-  constructor(private _http: HttpClient, private queryFlattenerService:QueryFlattenerService) { }
+    _apiUrl: string = `${this.base_url}/shelters`;
+  
+  constructor(private _http: HttpClient, private queryFlattenerService:QueryFlattenerService) { super()}
 
   getAllShelters(){
     return this._http.get(this._apiUrl);

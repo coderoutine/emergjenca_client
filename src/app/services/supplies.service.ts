@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inherits } from 'util';
+import { BaseService } from './service.base';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SuppliesService {
+export class SuppliesService extends BaseService {
 
-  _apiUrl: string = "https://localhost:5001/api/supplies";
+  _apiUrl: string = `${this.base_url}/supplies`;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) { super()}
 
   getAllSupplies(){
     return this._http.get(this._apiUrl);
