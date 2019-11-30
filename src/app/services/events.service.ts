@@ -12,11 +12,16 @@ export class EventsService  extends BaseService {
   _sheltersApi: string = `${this.base_url}/shelters`
   _suppliesApi: string =  `${this.base_url}/supplies`
   _contactPersonsApi: string = `${this.base_url}/contactpersons`
+  _volunteersApi: string = `${this.base_url}/volunteers`
 
   constructor(private _http: HttpClient, private queryFlattenerService:QueryFlattenerService) { super()}
 
   getAllEvents(){
     return this._http.get(this._apiUrl);
+  }
+
+  getAllVolunteers(){
+    return this._http.get(this._volunteersApi);
   }
 
   getEventByID(eventID: string){
@@ -30,6 +35,15 @@ export class EventsService  extends BaseService {
       })
     };
     return this._http.post(this._apiUrl, payload, httpOptions);
+  }
+
+  addShelter(payload: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this._http.post(this._sheltersApi, payload, httpOptions);
   }
 
   getShelters(filter: any){

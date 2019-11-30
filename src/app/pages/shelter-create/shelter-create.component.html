@@ -1,107 +1,101 @@
 <div class="col-md-12">
     <div class="card card-user">
-      <!-- <div class="card-header"> -->
-        <!-- <h5 class="card-title">Shto strehe</h5> -->
-      <!-- </div> -->
+      <div class="card-header">
+        <h5 class="card-title">Shto nje vend strehimi ose nje pike te sigurte ku mund te qendrohet perkohesisht</h5>
+      </div>
       <div class="card-body">
-        <form>
+        <form [formGroup]="shelterForm" (ngSubmit)="onSubmit(shelterForm)">
           <div class="row">
             <div class="col-md-4 pr-1">
               <div class="form-group">
-                <label>Hoteli/Shpia</label>
-                <input type="text" class="form-control" placeholder="Vendi">
+                <label>Emri i strehes</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Emer hoteli, emer personi...">
+              </div>
+            </div>
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Qyteti</label>
+                <input type="text" class="form-control" formControlName="city"  placeholder="Emri i qytetit  ku ndodhet streha">
               </div>
             </div>
             <div class="col-md-4 pl-1">
               <div class="form-group">
-                <label for="exampleInputEmail1">Adresa emailit address</label>
-                <input type="email" class="form-control"  placeholder="Adresa emailit">
-              </div>
-            </div>
-
-            <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Numri telefonit</label>
-                  <input type="text" class="form-control"  placeholder="+355...">
-                </div>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 pr-1">
-              <div class="form-group">
-                <label>Shto nje vend strehimi</label>
-                <select class="form-control">
-                    <option value="event.id" *ngFor="let event of events">{{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}} - {{event.city}}, {{event.country}}</option>
-                  </select>
+                <label>Shteti</label>
+                <input type="text" class="form-control" formControlName="country" placeholder="Emri i shtetit ku ndodhet streha">
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 pr-1">
+            <div class="col-md-6 pl-1">
               <div class="form-group">
-                <label>Emri kontaktit</label>
-                <input type="text" class="form-control" placeholder="Emri">
+                <label>Zgjidhni llojin e strehes</label>
+                <select class="form-control" formControlName="type">
+                  <option value=1>Zone e sigurte qendrimi</option>
+                  <option value=2>Vend per te fjetur</option>
+                </select>
               </div>
             </div>
             <div class="col-md-6 pl-1">
               <div class="form-group">
-                <label>Mbiemri kontaktik</label>
-                <input type="text" class="form-control" placeholder="Mbiemri">
+                <label>Kapaciteti i strehes</label>
+                <input type="number" class="form-control" formControlName="capacity" placeholder="Numri i personave qe kjo strehe mund te mbaje">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Adresa</label>
-                <input type="text" class="form-control" placeholder="Adresa e shtepise/hotelit">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>Qyteti</label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="col-md-6 px-1">
-              <div class="form-group">
-                <label>Shteti</label>
-                <input type="text" class="form-control">
+                <label>Adresa ku ndodhet streha</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Adresa e shtepise/hotelit">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Rreth nesh</label>
-                <textarea class="form-control textarea">Nje pershkrim i shkurter ne lidhje me kete strehe..</textarea>
+                <label>Pershkrim</label>
+                <textarea class="form-control textarea" formControlName="description" placeholder="Nje pershkrim me i detajuar i adreses (perballe dyqanit x, etj..)"></textarea>
               </div>
             </div>
           </div>
           <div class="row">
-              <div class="col-md-12">
-                <div class="card ">
-                  <div class="card-header ">
-                    Ku ndodhet streha?
-                  </div>
-                  <div class="card-body ">
-                    <div id="map" class="map">
-                      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
-                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-                      </agm-map>
-                    </div>
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label>Zgjidh nje raport/emergjence te cile i perket ky vend strehimi</label>
+                <select class="form-control" formControlName="eventId">
+                    <option [value]="event.id" *ngFor="let event of events">{{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}} - {{event.city}}, {{event.country}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card ">
+                <div class="card-header ">
+                  Ku ndodhet streha?
+                </div>
+                <div class="card-body ">
+                  <div id="map" class="map">
+                    <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
+                      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
           <div class="row">
             <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round" (click)="addShelter()">Shto strehe</button>
+              <span *ngIf="shelterForm.invalid" class="text-danger">Ju duhet te plotesoni te gjitha fushat per te shtuar nje strehe</span>
             </div>
           </div>
+          <div class="row">
+              <div class="update ml-auto mr-auto">
+                  <button type="submit" [disabled]="shelterForm.invalid" class="btn btn-primary btn-round">Shto strehe</button>
+                  <!-- <button type="submit" class="btn btn-primary btn-round">Shto strehe</button> -->
+              </div>
+            </div>
         </form>
       </div>
     </div>
