@@ -32,19 +32,16 @@ export class GeoLocationService {
       });
   }
 
-  public getGeolocationDetails(pos: Position): Observable<GeolocationDetails> {
-    // pk.6d1e392d66ee00ad9cdb1169e12d6e7c
-
-
-    return this._http.get(`https://eu1.locationiq.com/v1/reverse.php?key=7e8d552d2fe686&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`).pipe(
+  public getGeolocationDetails(lat:number, lng:number): Observable<GeolocationDetails> {
+   return this._http.get(`https://eu1.locationiq.com/v1/reverse.php?key=7e8d552d2fe686&lat=${lat}&lon=${lng}&format=json`)
+   .pipe(
       map((response: any) => {
         return {
-          city: response.city,
-          country: response.country,
-          neighbourhood: response.neighbourhood,
-          postcode: response.postcode
+          city: response.address.city || response.address.village,
+          country: response.address.country,
+          neighbourhood: response.address.neighbourhood,
+          postcode: response.address.postcode
         }
       }));
-  
   }
 }

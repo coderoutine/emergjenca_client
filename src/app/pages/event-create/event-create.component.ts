@@ -30,11 +30,13 @@ export class EventCreateComponent implements OnInit {
       lat: ['', Validators.required],
       lng: ['', Validators.required]
     });
+    this.reportForm.controls['time'].setValue(new Date().toISOString().substring(0,10));
+
   }
 
   ngOnInit(): void {
     this.assignLatLngToForm()
-    // this.trySetCurrentLocation();
+    this.trySetCurrentLocation();
   }
 
   onSubmit(form) {
@@ -51,6 +53,7 @@ export class EventCreateComponent implements OnInit {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.assignLatLngToForm()
+    this.loadGeolocationDetails();
   }
 
   assignLatLngToForm() {
@@ -70,14 +73,16 @@ export class EventCreateComponent implements OnInit {
           this.lat = pos.coords.latitude;
           this.lng = pos.coords.longitude;
           this.assignLatLngToForm()
-           this.loadGeolocationDetails(pos);
+           this.loadGeolocationDetails();
         }
       });
 
   }
-  loadGeolocationDetails(pos:Position){
-    this.geoLocationService.getGeolocationDetails(pos).subscribe(result=>{
+  loadGeolocationDetails(){
+    this.geoLocationService.getGeolocationDetails(this.lat,this.lng).subscribe(result=>{
         console.log("GEOLOCATION DETAILS => ", result)
+        this.reportForm.controls['city'].setValue(result && result.city);
+        this.reportForm.controls['country'].setValue(result && result.country);
     })
   }
 }
