@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SignalRService } from './services/signal-r.service';
+import { NotificationService } from './services/signal-r.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,12 @@ import { SignalRService } from './services/signal-r.service';
 })
 
 export class AppComponent{
-  constructor(private signalRService:SignalRService){
-    signalRService.startConnection();
-    signalRService.onNotify((data)=>{
+  constructor(private notificationService:NotificationService,private toastr: ToastrService){
+    notificationService.startConnection();
+    notificationService.onNotify((data)=>{
       console.log('notification data',data)
-      alert('new notification ' + data.Type)
+      //personalize message more depending on type returned from data.Type
+      this.toastr.info('Informacion', 'Eshte shtuar nje informacion i ri.');
     })
   }
 }

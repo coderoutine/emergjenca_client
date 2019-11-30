@@ -5,7 +5,7 @@ import { BaseService } from './service.base';
 @Injectable({
   providedIn: 'root'
 })
-export class SignalRService extends BaseService {
+export class NotificationService extends BaseService {
  
 private hubConnection: signalR.HubConnection
  
