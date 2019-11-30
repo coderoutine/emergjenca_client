@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventsService } from 'app/services/events.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ShelterCreateModel } from 'app/model/ShelterModel';
 
 
@@ -15,6 +15,7 @@ import { ShelterCreateModel } from 'app/model/ShelterModel';
 
 export class ShelterCreateComponent implements OnInit{
   shelterForm: FormGroup;
+  contactPersons: FormArray;
   eventId: string;
   eventType: number;
   
@@ -39,15 +40,41 @@ export class ShelterCreateComponent implements OnInit{
       description: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
-      eventId: ['', Validators.required]
+      eventId: ['', Validators.required],
+      contactPersons: this.fb.array([ this.createContact() ])
     });
+  }
+
+  createContact(): FormGroup {
+    return this.fb.group({
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+    });
+  }
+
+
+  addNewContact(){
+    this.addItem();
+  }
+
+  removeContact(){
+    if(this.contactPersons.length > 1){
+      this.contactPersons = this.shelterForm.get('contactPersons') as FormArray;
+      this.contactPersons.removeAt(this.contactPersons.length - 1);
+    } else {
+    }
+  }
+  
+  addItem(): void {
+    this.contactPersons = this.shelterForm.get('contactPersons') as FormArray;
+    this.contactPersons.push(this.createContact());
   }
 
   ngOnInit() {
     this.getRouteParameters();
     this.assignLatLngToForm();
-    // this.getAllVolunteers();
-    
   }
 
   onSubmit() {
@@ -75,15 +102,8 @@ export class ShelterCreateComponent implements OnInit{
     this.shelterForm.controls['lng'].setValue(this.lng.toString());
   }
 
-  getAllVolunteers(){
-    this._service.getAllVolunteers().subscribe((data: any) => {
-      this.volunteers = data;
-    })
-  }
-
   mapClicked(event){
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
   }
-  
 }

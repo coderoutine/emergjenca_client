@@ -1,3 +1,5 @@
+import {ContactPerson} from './ContactPerson';
+
 export class ShelterCreateModel{
       type:number
       capacity: number
@@ -9,6 +11,8 @@ export class ShelterCreateModel{
       lat: string
       lng: string
       eventId: string
+      contactPersons: ContactPerson[]
+
      constructor(input:ShelterCreateModel=null){
          if(!input) return;
          this.type= Number(input.type) //Shelter
@@ -21,6 +25,7 @@ export class ShelterCreateModel{
          this.lat=input.lat;
          this.lng=input.lng
          this.eventId = input.eventId
+         this.contactPersons = input.contactPersons;
      }
 
      public toApiPayload(): ShelterCreateModel{
