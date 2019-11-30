@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EventsService } from 'app/services/events.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GeoLocationService } from 'app/services/geolocation.service';
+import { EventCreateModel } from 'app/model/EventModel';
 
 
 @Component({
@@ -40,8 +41,9 @@ export class EventCreateComponent implements OnInit {
   }
 
   onSubmit(form) {
-    console.log("FORM == ", this.reportForm.value);
-    this._service.addEvent(this.reportForm.value).subscribe((data) => {
+    var data = new EventCreateModel(this.reportForm.value as EventCreateModel);
+    console.log("FORM == ", data );
+    this._service.addEvent(data.toApiPayload()).subscribe((data) => {
       console.log("EVENT ADDED => ", data);
       this.router.navigate(["dashboard"]);
     }, error => {
