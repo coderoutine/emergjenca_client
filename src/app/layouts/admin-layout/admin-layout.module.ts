@@ -11,9 +11,7 @@ import { NotificationsComponent }   from '../../pages/notifications/notification
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventDetailsComponent } from 'app/pages/event-details/event-details.component';
 import { AgmCoreModule } from '@agm/core';
-import { SafetyZonesComponent } from 'app/pages/safety-zones/safety-zones.component';
 import { ShelterCreateComponent } from 'app/pages/shelter-create/shelter-create.component';
-import { SafetyZoneCreateComponent } from 'app/pages/safety-zone-create/safety-zone-create.component';
 import { SupplyCreateComponent } from 'app/pages/supply-create/supply-create.component';
 import { EventCreateComponent } from 'app/pages/event-create/event-create.component';
 
@@ -33,9 +31,7 @@ import { EventCreateComponent } from 'app/pages/event-create/event-create.compon
     EventDetailsComponent,
     ShelterCreateComponent,
     EventCreateComponent,
-    SafetyZoneCreateComponent,
     SupplyCreateComponent,
-    SafetyZonesComponent,
     NotificationsComponent,
   ]
 })

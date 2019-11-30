@@ -123,7 +123,7 @@ export class EventDetailsComponent implements OnInit{
 
   addSupplyToEvent(){
     console.log("this.route.snapshot == ", this.router.url);
-    this.router.navigate([this.router.url+"/ssupply-create"]);
+    this.router.navigate([this.router.url+"/supply-create"]);
   }
 
 }

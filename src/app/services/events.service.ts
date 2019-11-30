@@ -46,6 +46,15 @@ export class EventsService  extends BaseService {
     return this._http.post(this._sheltersApi, payload, httpOptions);
   }
 
+  addSupply(payload: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this._http.post(this._suppliesApi, payload, httpOptions);
+  }
+
   getShelters(filter: any){
     let queryStringFilter= this.queryFlattenerService.toQueryString(filter||{})
     return this._http.get(`${this._sheltersApi}?${queryStringFilter}`);
