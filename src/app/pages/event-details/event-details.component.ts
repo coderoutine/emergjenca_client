@@ -80,7 +80,6 @@ export class EventDetailsComponent implements OnInit{
   }
 
   getSupplies(){
-    // this.router.navigate(["supplies/"+this.eventId]);
     this.eventService.getSupplies({events:[this.eventId], types:[]}).subscribe((data: any) => {
       this.supplies = data;
       this.showSafetyZones = false;
@@ -110,4 +109,21 @@ export class EventDetailsComponent implements OnInit{
       this.showModal = false;
     })
   }
+
+
+  addShelterToEvent(){
+    console.log("this.route.snapshot == ", this.router.url);
+    this.router.navigate([this.router.url+"/shelter-create/2"]);
+  }
+
+  addSafetyZoneToEvent(){
+    console.log("this.route.snapshot == ", this.router.url);
+    this.router.navigate([this.router.url+"/shelter-create//1"]);
+  }
+
+  addSupplyToEvent(){
+    console.log("this.route.snapshot == ", this.router.url);
+    this.router.navigate([this.router.url+"/ssupply-create"]);
+  }
+
 }

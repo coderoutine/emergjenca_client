@@ -6,42 +6,32 @@
       <div class="card-body">
         <form [formGroup]="shelterForm" (ngSubmit)="onSubmit(shelterForm)">
           <div class="row">
-            <div class="col-md-4 pr-1">
+            <div class="col-md-3 col-lg-3 pr-1">
               <div class="form-group">
                 <label>Emri i strehes</label>
                 <input type="text" class="form-control" formControlName="name" placeholder="Emer hoteli, emer personi...">
               </div>
             </div>
-            <div class="col-md-4 pr-1">
+            <div class="col-md-3 col-lg-3 pr-1">
               <div class="form-group">
                 <label>Qyteti</label>
                 <input type="text" class="form-control" formControlName="city"  placeholder="Emri i qytetit  ku ndodhet streha">
               </div>
             </div>
-            <div class="col-md-4 pl-1">
+            <div class="col-md-3 col-lg-3 pl-1">
               <div class="form-group">
                 <label>Shteti</label>
                 <input type="text" class="form-control" formControlName="country" placeholder="Emri i shtetit ku ndodhet streha">
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Zgjidhni llojin e strehes</label>
-                <select class="form-control" formControlName="type">
-                  <option value=1>Zone e sigurte qendrimi</option>
-                  <option value=2>Vend per te fjetur</option>
-                </select>
+            <div class="col-md-3 col-lg-3 pl-1">
+                <div class="form-group">
+                  <label>Kapaciteti i strehes</label>
+                  <input type="number" class="form-control" formControlName="capacity" placeholder="Numri i personave qe kjo strehe mund te mbaje">
+                </div>
               </div>
-            </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Kapaciteti i strehes</label>
-                <input type="number" class="form-control" formControlName="capacity" placeholder="Numri i personave qe kjo strehe mund te mbaje">
-              </div>
-            </div>
           </div>
+          
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -55,16 +45,6 @@
               <div class="form-group">
                 <label>Pershkrim</label>
                 <textarea class="form-control textarea" formControlName="description" placeholder="Nje pershkrim me i detajuar i adreses (perballe dyqanit x, etj..)"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 pr-1">
-              <div class="form-group">
-                <label>Zgjidh nje raport/emergjence te cile i perket ky vend strehimi</label>
-                <select class="form-control" formControlName="eventId">
-                    <option [value]="event.id" *ngFor="let event of events">{{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}} - {{event.city}}, {{event.country}}</option>
-                </select>
               </div>
             </div>
           </div>

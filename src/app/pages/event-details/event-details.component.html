@@ -1,44 +1,49 @@
 
 <div class="row" *ngIf="event">
   <div class="col-md-12">
-    <div class="card card-user">
-      <div class="image">
-        <!-- <img src="assets/img/quake.jpeg" alt="..."> -->
-      </div>
+    <div class="card">
       <div class="card-body">
-        <div class="author">
-            <h2 class="title">
-              {{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}}
-            </h2>
-            <h5>
-              {{event.city}}, {{event.country}}
-            </h5>
-        </div>
-        <p class="description text-center">
-          {{event.description}}
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container">
+        <div class="places-buttons">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-6 ml-auto" (click)="getSafetyZones()">
-              <h5>{{event.totalSafeZones}}
-                <br>
-                <small>Pika grumbullimi</small>
-              </h5>
+            <div class="col-md-6 ml-auto mr-auto text-center">
+              <h4 class="card-title"> {{event.type == 1 ? 'Termet' : (event.type == 2 ? 'Zjarr' : 'Permbytje')}}
+                <p class="category">{{event.city}}, {{event.country}}</p></h4>
+                <p> {{event.description}} </p>
             </div>
-            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto" (click)="getShelters()">
-              <h5>{{event.totalShelters}}
-                <br>
-                <small>Strehime</small>
-              </h5>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 ml-auto mr-auto">
+              <div class="row">
+                <div class="col-md-4  ml-auto">
+                  <div class="alert alert-info text-center" (click)="getSafetyZones()">
+                    <h1>{{event.totalSafeZones}}</h1> <h5>pika te sigurta grumbullimi</h5>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="alert alert-info text-center" (click)="getShelters()">
+                    <h1>{{event.totalShelters}}</h1> <h5>vend-strehime</h5>
+                  </div>
+                </div><div class="col-md-4">
+                  <div class="alert alert-info text-center" (click)="getSupplies()">
+                    <h1>{{event.totalSupplies}}</h1> <h5>pika ndihme/ushqimore</h5>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-lg-3 mr-auto" (click)="getSupplies()">
-              <h5>{{event.totalSupplies}}
-                <br>
-                <small>Ndihmesa/Ushqime</small>
-              </h5>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 ml-auto mr-auto">
+              <div class="row">
+                <div class="col-md-4" (click)="addSafetyZoneToEvent()">
+                  <button class="btn btn-success btn-block">Shto pike te re grumbullimi</button>
+                </div>
+                <div class="col-md-4" (click)="addShelterToEvent()">
+                  <button class="btn btn-success btn-block">Shto vend te ri strehimi</button>
+                </div>
+                <div class="col-md-4" (click)="addSupplyToEvent()">
+                  <button class="btn btn-success btn-block">Shto pike ndihme/ushqimore</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

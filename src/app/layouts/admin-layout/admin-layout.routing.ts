@@ -11,11 +11,10 @@ import { EventCreateComponent } from 'app/pages/event-create/event-create.compon
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
+    { path: 'event-create',      component: EventCreateComponent },
     { path: 'event-details/:id',      component: EventDetailsComponent },
     { path: 'safety-zones/:eventId/:type',      component: SafetyZonesComponent },
-    { path: 'shelter-create',      component: ShelterCreateComponent },
-    { path: 'event-create',      component: EventCreateComponent },
-    { path: 'safety-zone-create',      component: SafetyZoneCreateComponent },
-    { path: 'supply-create',      component: SupplyCreateComponent },
-    { path: 'notifications',  component: NotificationsComponent }
+    { path: 'event-details/:id/shelter-create/:type',      component: ShelterCreateComponent },
+    { path: 'event-details/:id/supply-create',      component: SupplyCreateComponent },
+    // { path: 'notifications',  component: NotificationsComponent }
 ];
