@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ShelterCreateComponent } from 'app/pages/shelter-create/shelter-create.component';
 import { SupplyCreateComponent } from 'app/pages/supply-create/supply-create.component';
 import { EventCreateComponent } from 'app/pages/event-create/event-create.component';
+import { DisqusModule } from 'ngx-disqus';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { EventCreateComponent } from 'app/pages/event-create/event-create.compon
     }),
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    DisqusModule
   ],
   declarations: [
     DashboardComponent,

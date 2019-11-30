@@ -16,6 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiAuthorizationModule } from './api-authorization/api-authorization.module';
 import { AuthorizeInterceptor } from './api-authorization/authorize.interceptor';
+import { DISQUS_SHORTNAME } from 'ngx-disqus';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { AuthorizeInterceptor } from './api-authorization/authorize.interceptor'
     FooterModule,
     ApiAuthorizationModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],
+  providers: [
+    { provide: DISQUS_SHORTNAME, useValue: 'emergency-al' },
+     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
