@@ -2,6 +2,9 @@ import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/cor
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
+import { AuthorizeService } from 'app/api-authorization/authorize.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     moduleId: module.id,
@@ -15,16 +18,18 @@ export class NavbarComponent implements OnInit{
     private nativeElement: Node;
     private toggleButton;
     private sidebarVisible: boolean;
-
+    public isAuthenticated: Observable<boolean>;
+    public userName: Observable<string>;
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
+    constructor(private authorizeService: AuthorizeService, location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
-
+     
+   
     ngOnInit(){
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         var navbar : HTMLElement = this.element.nativeElement;
@@ -32,6 +37,8 @@ export class NavbarComponent implements OnInit{
         this.router.events.subscribe((event) => {
           this.sidebarClose();
        });
+       this.isAuthenticated = this.authorizeService.isAuthenticated();
+       this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
     }
     
     getTitle(){
@@ -44,7 +51,7 @@ export class NavbarComponent implements OnInit{
               return this.listTitles[item].title;
           }
       }
-      return 'Dashboard';
+      return 'Faqja Kryesore';
     }
     sidebarToggle() {
         if (this.sidebarVisible === false) {

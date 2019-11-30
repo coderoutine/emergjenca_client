@@ -12,8 +12,10 @@ import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ApiAuthorizationModule } from './api-authorization/api-authorization.module';
+import { AuthorizeInterceptor } from './api-authorization/authorize.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NavbarModule,
     ToastrModule.forRoot(),
-    FooterModule
+    FooterModule,
+    ApiAuthorizationModule
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
