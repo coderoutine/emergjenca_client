@@ -9,20 +9,20 @@
             <div class="col-md-4 pr-1">
               <div class="form-group">
                 <label>Emri i vend grumbullimit te ndihmave</label>
-                <input type="text" class="form-control" placeholder="Shkolla X, Stadiumi Y....>">
+                <input type="text" class="form-control" formControlName="name" placeholder="Shkolla X, Stadiumi Y, etj...">
               </div>
             </div>
             <div class="col-md-4 pl-1">
               <div class="form-group">
                 <label for="exampleInputEmail1">Qyteti</label>
-                <input type="text" class="form-control"  placeholder="Emri i qytetit">
+                <input type="text" class="form-control"  formControlName="city" placeholder="Emri i qytetit">
               </div>
             </div>
 
             <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Shteti</label>
-                  <input type="text" class="form-control"  placeholder="Emri i shtetit">
+                  <input type="text" class="form-control" formControlName="country"  placeholder="Emri i shtetit">
                 </div>
               </div>
           </div>
@@ -30,7 +30,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Adresa</label>
-                <input type="text" class="form-control" placeholder="Adresa e shtepise/hotelit">
+                <input type="text" class="form-control" formControlName="address" placeholder="Adresa e shtepise/hotelit">
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Pershkrimi</label>
-                <textarea class="form-control textarea" placeholder="Jeni detaje te tjera rreth vendit..."></textarea>
+                <textarea class="form-control textarea" formControlName="description" placeholder="Jepni detaje te tjera rreth vendit..."></textarea>
               </div>
             </div>
           </div>
@@ -61,10 +61,16 @@
             </div>
 
           <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round" (click)="addSupply()">Shto vend ndihmesash</button>
+              <div class="update ml-auto mr-auto">
+                <span *ngIf="supplyForm.invalid" class="text-danger">Ju duhet te plotesoni te gjitha fushat per te shtuar vend furnizimi/ndihmesash</span>
+              </div>
             </div>
-          </div>
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                  <button type="submit" [disabled]="supplyForm.invalid" class="btn btn-primary btn-round">Shto vend furnizimi/ndihmesa</button>
+              </div>
+            </div>
+
         </form>
       </div>
     </div>

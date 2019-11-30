@@ -45,7 +45,7 @@ export class ShelterCreateComponent implements OnInit{
 
   ngOnInit() {
     this.getRouteParameters();
-    this.assignLatLngToForm()
+    this.assignLatLngToForm();
     // this.getAllVolunteers();
     
   }

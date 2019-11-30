@@ -156,7 +156,7 @@
                     {{supply.description}}
                   </td>
                   <td>
-                    {{supply.status}}
+                    {{supply.status == 1 ? 'Hapur' : 'Mbyllur'}}
                   </td>
                   <td class="text-right" (click)="showShelterContact(supply.contactPersonId, mymodal)">
                     <a>Kontakto</a> 

@@ -42,6 +42,7 @@ export class SupplyCreateComponent implements OnInit{
 
   ngOnInit(): void {
     this.getRouteParameters();
+    this.assignLatLngToForm();
 
   }
 
@@ -49,6 +50,11 @@ export class SupplyCreateComponent implements OnInit{
     this.eventId = this._route.snapshot.paramMap.get("id");
     this.supplyForm.controls['eventId'].setValue(this.eventId);
     this.supplyForm.controls['status'].setValue(SupplyStatus.Open);
+  }
+
+  assignLatLngToForm() {
+    this.supplyForm.controls['lat'].setValue(this.lat.toString());
+    this.supplyForm.controls['lng'].setValue(this.lng.toString());
   }
 
   onSubmit() {
