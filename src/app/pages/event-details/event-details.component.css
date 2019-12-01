@@ -1,5 +1,8 @@
 agm-map {
-    height: 500px;
-  }
-  
+  height: 500px;
+}
+
+.modal-content{
+  width: 600px !important;
+}
   

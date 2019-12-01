@@ -99,8 +99,8 @@
                   <td>
                       {{shelter.capacity}} persona
                     </td>
-                  <td class="text-right" (click)="showShelterContact(0)">
-                    - lista konktakteve - 
+                  <td class="text-right" (click)="showShelterContacts(shelter.contactPersons, content)">
+                    Kontaktet
                   </td>
                 </tr>
               </tbody>
@@ -187,19 +187,48 @@
   </div>
 </div>
 
-<disqus [identifier]="eventId" ></disqus>
-
-
-
-<ng-template #mymodal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">{{contactPerson.firstName}} {{contactPerson.lastName}}</h4>
-    </div>
-    <div class="modal-body">
-      <h4> Tel: {{contactPerson.phone}}  </h4>
-      <h4> Email: {{contactPerson.email}} </h4>
-    </div>
+<ng-template #content let-modal>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Personat e kontaktit</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled team-members">
+          <li *ngFor="let person of contactPersons">
+            <div class="row">
+              <div class="col-md-2 col-2">
+                <div class="avatar">
+                  <img alt="Circle Image" class="img-circle img-no-padding img-responsive" src="assets/img/person-icon.png">
+                </div>
+              </div>
+              <div class="col-md-4 col-4"> {{person.firstName}} {{person.lastName}} <br><span class="text-muted"><small>{{person.phone}}</small></span></div>
+              <div class="col-md-6 col-6">
+                {{person.email}}
+              </div>
+            </div>
+          </li>
+          </ul>
+        </div>
+      </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
     </div>
   </ng-template>
+
+  <!-- <ng-template #content let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title">Hi there!</h4>
+          <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Hello, {{name}}!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+        </div>
+  </ng-template>
+   -->
+
+<disqus [identifier]="eventId" ></disqus>

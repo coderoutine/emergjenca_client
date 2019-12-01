@@ -23,7 +23,7 @@ export class EventDetailsComponent implements OnInit{
   type: number;
   shelters: any;
   supplies: any;
-  contactPerson: any;
+  contactPersons: any[];
 
   showShelters: boolean = false;
   showSafetyZones: boolean = false;
@@ -92,22 +92,31 @@ export class EventDetailsComponent implements OnInit{
     })
   }
 
-  showShelterContact(contactId, mymodal){
-    this.service.getShelterContactPerson(contactId).subscribe((data: any) => {
-      console.log("CONTACT DETAILS  ===  ", data);
-      this.contactPerson = data;
+  open(content) {
+    const modalRef = this.modalService.open(content);
+    modalRef.componentInstance.name = 'World';
+  }
+
+
+  showShelterContacts(contactPersons, content){
+
+    console.log("Contact Persons == ", contactPersons);
+    this.contactPersons = contactPersons;
+
+    // this.service.getShelterContactPerson(1).subscribe((data: any) => {
+    //   console.log("CONTACT DETAILS  ===  ", data);
       this.showModal = true;
       
-      this.modalService.open(mymodal, this.modalOptions).result.then((result) => {
+      this.modalService.open(content, this.modalOptions).result.then((result) => {
         // this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
 
-    }, error => {
-      console.log("ERROR CONTACT  ===  ", error);
-      this.showModal = false;
-    })
+    // }, error => {
+    //   console.log("ERROR CONTACT  ===  ", error);
+    //   this.showModal = false;
+    // })
   }
 
 
