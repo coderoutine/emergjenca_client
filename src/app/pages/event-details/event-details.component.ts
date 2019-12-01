@@ -21,6 +21,8 @@ export class EventDetailsComponent implements OnInit{
   event: any;
 
   type: number;
+  shelter: any;
+  supply: any;
   shelters: any;
   supplies: any;
   contactPersons: any[];
@@ -28,7 +30,6 @@ export class EventDetailsComponent implements OnInit{
   showShelters: boolean = false;
   showSafetyZones: boolean = false;
   showSupplies: boolean = false;
-  showModal: boolean = false;
 
   constructor(private router: Router, 
     private route: ActivatedRoute, 
@@ -102,21 +103,9 @@ export class EventDetailsComponent implements OnInit{
 
     console.log("Contact Persons == ", contactPersons);
     this.contactPersons = contactPersons;
-
-    // this.service.getShelterContactPerson(1).subscribe((data: any) => {
-    //   console.log("CONTACT DETAILS  ===  ", data);
-      this.showModal = true;
-      
-      this.modalService.open(content, this.modalOptions).result.then((result) => {
-        // this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-
-    // }, error => {
-    //   console.log("ERROR CONTACT  ===  ", error);
-    //   this.showModal = false;
-    // })
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
 
@@ -133,6 +122,47 @@ export class EventDetailsComponent implements OnInit{
   addSupplyToEvent(){
     console.log("this.route.snapshot == ", this.router.url);
     this.router.navigate([this.router.url+"/supply-create"]);
+  }
+
+
+  removeShelter(shelter, contentDeleteConfirmation){
+    this.shelter = shelter;
+    console.log("SHELTER == ", shelter);
+
+    this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
+      console.log(result);
+      if(result){
+        console.log("KONFIRMO");
+        this.service.removeShelter(shelter.id).subscribe(() => {
+          console.log("Shelter deleted");
+        }, error => {
+          console.log("Shelter could not be deleted: ", error);
+        })
+      } else {
+        console.log("ANULLO");
+      }
+    }, (reason) => {
+    });
+  }
+
+  removeSupply(shelter, contentDeleteConfirmation){
+    this.shelter = shelter;
+    console.log("SHELTER == ", shelter);
+
+    this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
+      console.log(result);
+      if(result){
+        console.log("KONFIRMO");
+        this.service.removeShelter(shelter.id).subscribe(() => {
+          console.log("Shelter deleted");
+        }, error => {
+          console.log("Shelter could not be deleted: ", error);
+        })
+      } else {
+        console.log("ANULLO");
+      }
+    }, (reason) => {
+    });
   }
 
 }

@@ -78,8 +78,11 @@
               <th>
                 Kapaciteti
               </th>
+              <th>
+                Kontaktet
+              </th>
               <th class="text-right">
-                Kontakti
+                Veprime
               </th>
             </thead>
             <tbody>
@@ -98,11 +101,14 @@
                   </td>
                   <td>
                       {{shelter.capacity}} persona
-                    </td>
-                  <td class="text-right" (click)="showShelterContacts(shelter.contactPersons, content)">
-                    Kontaktet
                   </td>
-                </tr>
+                  <td (click)="showShelterContacts(shelter.contactPersons, content)">
+                    Shfaq
+                  </td>
+                  <td class="text-center">
+                      <button class="btn btn-danger" (click)="removeShelter(shelter, contentDeleteConfirmation)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-info"><i class="fa fa-pencil"></i></button>
+                  </td>
               </tbody>
           </table>
         </div>
@@ -137,8 +143,11 @@
               <th>
                 Statusi
               </th>
+              <th>
+                Kontaktet
+              </th>
               <th class="text-right">
-                Kontakti
+                Veprimet
               </th>
             </thead>
             <tbody>
@@ -158,8 +167,12 @@
                   <td>
                     {{supply.status == 1 ? 'Hapur' : 'Mbyllur'}}
                   </td>
-                  <td class="text-right" (click)="showShelterContact(supply.contactPersonId, mymodal)">
-                    <a>Kontakto</a> 
+                  <td (click)="showShelterContacts(supply.contactPersons, content)">
+                    <a>Shfaq</a> 
+                  </td>
+                  <td class="text-center">
+                      <button class="btn btn-danger" (click)="removeSupply(supply, contentDeleteConfirmation)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-info"><i class="fa fa-pencil"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -213,22 +226,35 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
     </div>
-  </ng-template>
+</ng-template>
 
-  <!-- <ng-template #content let-modal>
-      <div class="modal-header">
-          <h4 class="modal-title">Hi there!</h4>
-          <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<ng-template #contentDeleteConfirmation let-modal>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Jeni te sigurt per veprimin?</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-md-12 col-12"> {{shelter.name}}<br>
+                <span class="text-muted">
+                <small>{{shelter.city}}, {{shelter.country}}</small></span>
+              </div>
+              <br>
+              <hr>
+              <div class="col-md-12 col-12">
+                <p>{{shelter.description}}</p>
+              </div>
+            </div>
+          </li>
+          </ul>
         </div>
-        <div class="modal-body">
-          <p>Hello, {{name}}!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-        </div>
-  </ng-template>
-   -->
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">Anullo</button>
+      <button type="button" class="btn btn-outline-danger" (click)="modal.close(true)">Konfirmo</button>
+    </div>
+</ng-template>
 
 <disqus [identifier]="eventId" ></disqus>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { EventsService } from 'app/services/events.service';
 import { GeoLocationService } from 'app/services/geolocation.service';
 import { SupplyModel } from 'app/model/SupplyModel';
@@ -20,6 +20,7 @@ export class SupplyCreateComponent implements OnInit{
   lat: number = 41.329121; 
   lng: number = 19.819628;
   supplyForm: FormGroup;
+  contactPersons: FormArray;
   eventId: string;
 
   constructor(private router: Router, 
@@ -37,6 +38,7 @@ export class SupplyCreateComponent implements OnInit{
       lng: ['', Validators.required],
       status: [0, Validators.required],
       eventId: [0, Validators.required],
+      contactPersons: this.fb.array([ this.createContact() ])
     });
   }
 
@@ -44,6 +46,33 @@ export class SupplyCreateComponent implements OnInit{
     this.getRouteParameters();
     this.assignLatLngToForm();
 
+  }
+
+  createContact(): FormGroup {
+    return this.fb.group({
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+    });
+  }
+
+
+  addNewContact(){
+    this.addItem();
+  }
+
+  removeContact(){
+    if(this.contactPersons.length > 1){
+      this.contactPersons = this.supplyForm.get('contactPersons') as FormArray;
+      this.contactPersons.removeAt(this.contactPersons.length - 1);
+    } else {
+    }
+  }
+  
+  addItem(): void {
+    this.contactPersons = this.supplyForm.get('contactPersons') as FormArray;
+    this.contactPersons.push(this.createContact());
   }
 
   getRouteParameters(){
@@ -61,12 +90,12 @@ export class SupplyCreateComponent implements OnInit{
     console.log("FORM == ", this.supplyForm.value );
     var data = new SupplyModel(this.supplyForm.value as SupplyModel);
     console.log("FORM == ", data );
-    this._service.addSupply(data.toApiPayload()).subscribe((data) => {
-      console.log("SHELTER ADDED => ", data);
-      this.router.navigate(["dashboard"]);
-    }, error => {
-      console.log("ERROR  == ", error);
-    })
+    // this._service.addSupply(data.toApiPayload()).subscribe((data) => {
+    //   console.log("SHELTER ADDED => ", data);
+    //   this.router.navigate(["dashboard"]);
+    // }, error => {
+    //   console.log("ERROR  == ", error);
+    // })
   }
 
   mapClicked(event){

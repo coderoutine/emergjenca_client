@@ -43,6 +43,39 @@
               </div>
             </div>
           </div>
+
+          <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Shtoni te gjithe personat qe mund te sherbejne si pika kontakti</label> <br>
+                  <button class="btn btn-success" (click)="addNewContact()">Shto te ri</button>
+                  <button class="btn btn-danger" (click)="removeContact()">Fshij te fundit</button>
+                </div>
+              </div>
+            </div>
+
+          <div class="row" formArrayName="contactPersons" *ngFor="let item of supplyForm.get('contactPersons').controls; let i = index;">
+              <div class="col" [formGroupName]="i">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="Emri">
+                </div>
+              </div>
+              <div class="col" [formGroupName]="i">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Mbiemri">
+                </div>
+              </div>
+              <div class="col" [formGroupName]="i">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="phone" placeholder="Nr. i tel">
+                </div>
+              </div>
+              <div class="col" [formGroupName]="i">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="email" placeholder="Emaili">
+                </div>
+              </div>
+            </div>
           <div class="row">
               <div class="col-md-12">
                 <div class="card ">

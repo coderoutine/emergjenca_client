@@ -1,3 +1,5 @@
+import { ContactPerson } from './ContactPerson'
+
 export class SupplyModel{
       name: string
       city: string
@@ -8,7 +10,8 @@ export class SupplyModel{
       lng: string
       status: number
       eventId: string
-      
+      contactPersons: ContactPerson[]
+
      constructor(input:SupplyModel=null){
          if(!input) return;
          this.name=input.name;
@@ -20,6 +23,7 @@ export class SupplyModel{
          this.lng=input.lng;
          this.status = input.status;
          this.eventId = input.eventId
+         this.contactPersons = input.contactPersons
      }
 
      public toApiPayload(): SupplyModel{

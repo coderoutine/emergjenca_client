@@ -46,6 +46,10 @@ export class EventsService  extends BaseService {
     return this._http.post(this._sheltersApi, payload, httpOptions);
   }
 
+  removeShelter(id: string){
+    return this._http.delete(this._sheltersApi+"/"+id);
+  }
+
   addSupply(payload: any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -53,6 +57,10 @@ export class EventsService  extends BaseService {
       })
     };
     return this._http.post(this._suppliesApi, payload, httpOptions);
+  }
+
+  removeSupply(id: string){
+    return this._http.delete(this._suppliesApi+"/"+id);
   }
 
   getShelters(filter: any){
