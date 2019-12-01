@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventsService } from 'app/services/events.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -59,12 +58,9 @@ export class ShelterCreateComponent implements OnInit{
     this.addItem();
   }
 
-  removeContact(){
-    if(this.contactPersons.length > 1){
-      this.contactPersons = this.shelterForm.get('contactPersons') as FormArray;
-      this.contactPersons.removeAt(this.contactPersons.length - 1);
-    } else {
-    }
+  removeContact(index:number){
+    this.contactPersons = this.shelterForm.get('contactPersons') as FormArray;
+    this.contactPersons.removeAt(index);
   }
   
   addItem(): void {
