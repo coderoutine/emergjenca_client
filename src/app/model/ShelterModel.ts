@@ -1,6 +1,7 @@
 import {ContactPerson} from './ContactPerson';
 
 export class ShelterCreateModel{
+      id: string;
       type:number
       capacity: number
       city: string
@@ -32,4 +33,10 @@ export class ShelterCreateModel{
          //customize payload if necessary
          return this;
      }
+
+     public updateShelterApi(id): any{
+        //customize payload if necessary
+        this.id = id;
+        return this;
+    }
 }

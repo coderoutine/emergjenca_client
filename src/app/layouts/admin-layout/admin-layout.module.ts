@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventDetailsComponent } from 'app/pages/event-details/event-details.component';
 import { AgmCoreModule } from '@agm/core';
 import { ShelterCreateComponent } from 'app/pages/shelter-create/shelter-create.component';
+import { ShelterUpdateComponent } from 'app/pages/shelter-update/shelter-update.component';
 import { SupplyCreateComponent } from 'app/pages/supply-create/supply-create.component';
 import { EventCreateComponent } from 'app/pages/event-create/event-create.component';
 import { DisqusModule } from 'ngx-disqus';
@@ -32,6 +33,7 @@ import { DisqusModule } from 'ngx-disqus';
     DashboardComponent,
     EventDetailsComponent,
     ShelterCreateComponent,
+    ShelterUpdateComponent,
     EventCreateComponent,
     SupplyCreateComponent,
     NotificationsComponent,

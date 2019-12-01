@@ -1,0 +1,116 @@
+<div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Modifiko te dhenat e ketij strehimi ose nje pike te sigurte ku mund te qendrohet perkohesisht</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="shelterForm" (ngSubmit)="onSubmit(shelterForm)">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 pr-1">
+              <div class="form-group">
+                <label>Emri i strehes</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Emer hoteli, emer personi...">
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-3 pr-1">
+              <div class="form-group">
+                <label>Qyteti</label>
+                <input type="text" class="form-control" formControlName="city"  placeholder="Emri i qytetit  ku ndodhet streha">
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-3 pl-1">
+              <div class="form-group">
+                <label>Shteti</label>
+                <input type="text" class="form-control" formControlName="country" placeholder="Emri i shtetit ku ndodhet streha">
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-3 pl-1">
+                <div class="form-group">
+                  <label>Kapaciteti i strehes</label>
+                  <input type="number" class="form-control" formControlName="capacity" placeholder="Numri i personave qe kjo strehe mund te mbaje">
+                </div>
+              </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Adresa ku ndodhet streha</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Adresa e shtepise/hotelit">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Pershkrim</label>
+                <textarea class="form-control textarea" formControlName="description" placeholder="Nje pershkrim me i detajuar i adreses (perballe dyqanit x, etj..)"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Shtoni te gjithe personat qe mund te sherbejne si pika kontakti</label> <br>
+                <a class="btn btn-success" (click)="addNewContact()">Shto te ri</a>
+                <a class="btn btn-danger" (click)="removeContact()">Fshij te fundit</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" formArrayName="contactPersons" *ngFor="let item of shelterForm?.get('contactPersons')?.controls; let i = index;">
+            <div class="col" [formGroupName]="i">
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="firstName" placeholder="Emri">
+              </div>
+            </div>
+            <div class="col" [formGroupName]="i">
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Mbiemri">
+              </div>
+            </div>
+            <div class="col" [formGroupName]="i">
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="phone" placeholder="Nr. i tel">
+              </div>
+            </div>
+            <div class="col" [formGroupName]="i">
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="email" placeholder="Emaili">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card ">
+                <div class="card-header">
+                  Ku ndodhet streha?
+                </div>
+                <div class="card-body ">
+                  <div id="map" class="map">
+                    <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)">
+                      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <span *ngIf="shelterForm.invalid" class="text-danger">Ju duhet te plotesoni te gjitha fushat per te perditesuar te dhenat e nje strehe</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+                <!-- <button type="submit" [disabled]="shelterForm.invalid" class="btn btn-primary btn-round">Perditeso te dhenat</button> -->
+                <button type="submit" class="btn btn-primary btn-round">Perditeso te dhenat</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+

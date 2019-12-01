@@ -110,17 +110,14 @@ export class EventDetailsComponent implements OnInit{
 
 
   addShelterToEvent(){
-    console.log("this.route.snapshot == ", this.router.url);
     this.router.navigate([this.router.url+"/shelter-create/2"]);
   }
 
   addSafetyZoneToEvent(){
-    console.log("this.route.snapshot == ", this.router.url);
     this.router.navigate([this.router.url+"/shelter-create//1"]);
   }
 
   addSupplyToEvent(){
-    console.log("this.route.snapshot == ", this.router.url);
     this.router.navigate([this.router.url+"/supply-create"]);
   }
 
@@ -145,15 +142,14 @@ export class EventDetailsComponent implements OnInit{
     });
   }
 
-  removeSupply(shelter, contentDeleteConfirmation){
-    this.shelter = shelter;
-    console.log("SHELTER == ", shelter);
+  removeSupply(supply, contentDeleteConfirmation){
+    this.supply = supply;
 
     this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
       console.log(result);
       if(result){
         console.log("KONFIRMO");
-        this.service.removeShelter(shelter.id).subscribe(() => {
+        this.service.removeShelter(supply.id).subscribe(() => {
           console.log("Shelter deleted");
         }, error => {
           console.log("Shelter could not be deleted: ", error);
@@ -163,6 +159,10 @@ export class EventDetailsComponent implements OnInit{
       }
     }, (reason) => {
     });
+  }
+
+  updateShelter(shelter){
+    this.router.navigate([this.router.url+"/shelter-update/"+shelter.id]);
   }
 
 }
