@@ -122,9 +122,9 @@ export class EventDetailsComponent implements OnInit{
   }
 
 
-  removeShelter(shelter, contentDeleteConfirmation){
+  removeShelter(shelter, contentDeleteConfirmationShelter){
     this.shelter = shelter;
-    this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
+    this.modalService.open(contentDeleteConfirmationShelter, this.modalOptions).result.then((result) => {
       console.log(result);
       if(result){
           this.service.removeShelter(shelter.id).subscribe(() => {
@@ -139,9 +139,9 @@ export class EventDetailsComponent implements OnInit{
     });
   }
 
-  removeSupply(supply, contentDeleteConfirmation){
+  removeSupply(supply, contentDeleteConfirmationSupply){
     this.supply = supply;
-    this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
+    this.modalService.open(contentDeleteConfirmationSupply, this.modalOptions).result.then((result) => {
       console.log(result);
       if(result){
         this.service.removeSupply(supply.id).subscribe(() => {

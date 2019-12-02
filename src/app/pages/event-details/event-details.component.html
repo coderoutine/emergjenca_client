@@ -106,7 +106,7 @@
                     Shfaq
                   </td>
                   <td class="text-center">
-                      <button class="btn btn-danger" (click)="removeShelter(shelter, contentDeleteConfirmation)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-danger" (click)="removeShelter(shelter, contentDeleteConfirmationShelter)"><i class="fa fa-close"></i></button>
                       <button class="btn btn-info" (click)="updateShelter(shelter)"><i class="fa fa-pencil"></i></button>
                   </td>
               </tbody>
@@ -171,7 +171,7 @@
                     <a>Shfaq</a> 
                   </td>
                   <td class="text-center">
-                      <button class="btn btn-danger" (click)="removeSupply(supply, contentDeleteConfirmation)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-danger" (click)="removeSupply(supply, contentDeleteConfirmationSupply)"><i class="fa fa-close"></i></button>
                       <button class="btn btn-info" (click)="updateSupply(supply)"><i class="fa fa-pencil"></i></button>
                   </td>
                 </tr>
@@ -183,7 +183,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="!showSupplies && !showShelters && !showSafetyZones">
+<div class="row" *ngIf="!showSupplies && !showShelters">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header ">
@@ -228,7 +228,7 @@
     </div>
 </ng-template>
 
-<ng-template #contentDeleteConfirmation let-modal>
+<ng-template #contentDeleteConfirmationSupply let-modal>
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Jeni te sigurt per veprimin?</h4>
@@ -255,6 +255,35 @@
       <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">Anullo</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.close(true)">Konfirmo</button>
     </div>
+</ng-template>
+
+<ng-template #contentDeleteConfirmationShelter let-modal>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Jeni te sigurt per veprimin?</h4>
+    </div>
+    <div class="card-body">
+      <ul class="list-unstyled team-members">
+        <li>
+          <div class="row">
+            <div class="col-md-12 col-12"> {{shelter.name}}<br>
+              <span class="text-muted">
+              <small>{{shelter.city}}, {{shelter.country}}</small></span>
+            </div>
+            <br>
+            <hr>
+            <div class="col-md-12 col-12">
+              <p>{{shelter.description}}</p>
+            </div>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">Anullo</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close(true)">Konfirmo</button>
+  </div>
 </ng-template>
 
 <disqus [identifier]="eventId" ></disqus>
