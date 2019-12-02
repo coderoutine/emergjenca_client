@@ -16,6 +16,7 @@ import { ShelterUpdateComponent } from 'app/pages/shelter-update/shelter-update.
 import { SupplyCreateComponent } from 'app/pages/supply-create/supply-create.component';
 import { EventCreateComponent } from 'app/pages/event-create/event-create.component';
 import { DisqusModule } from 'ngx-disqus';
+import { SupplyUpdateComponent } from 'app/pages/supply-update/supply-update.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { DisqusModule } from 'ngx-disqus';
     EventDetailsComponent,
     ShelterCreateComponent,
     ShelterUpdateComponent,
+    SupplyUpdateComponent,
     EventCreateComponent,
     SupplyCreateComponent,
     NotificationsComponent,

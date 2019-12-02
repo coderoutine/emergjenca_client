@@ -7,6 +7,7 @@ import { SupplyCreateComponent } from 'app/pages/supply-create/supply-create.com
 import { EventCreateComponent } from 'app/pages/event-create/event-create.component';
 import { AuthorizeGuard } from 'app/api-authorization/authorize.guard';
 import { ShelterUpdateComponent } from 'app/pages/shelter-update/shelter-update.component';
+import { SupplyUpdateComponent } from 'app/pages/supply-update/supply-update.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -14,6 +15,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'event-details/:id',      component: EventDetailsComponent },
     { path: 'event-details/:id/shelter-create/:type',      component: ShelterCreateComponent,canActivate: [AuthorizeGuard] },
     { path: 'event-details/:id/shelter-update/:shelterId',      component: ShelterUpdateComponent,canActivate: [AuthorizeGuard] },
+    { path: 'event-details/:id/supply-update/:supplyId',      component: SupplyUpdateComponent,canActivate: [AuthorizeGuard] },
     { path: 'event-details/:id/supply-create',      component: SupplyCreateComponent,canActivate: [AuthorizeGuard] },
     // { path: 'notifications',  component: NotificationsComponent }
 ];

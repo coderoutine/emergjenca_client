@@ -1,6 +1,7 @@
 import { ContactPerson } from './ContactPerson'
 
 export class SupplyModel{
+      id: string;
       name: string
       city: string
       country: string
@@ -30,4 +31,10 @@ export class SupplyModel{
          //customize payload if necessary
          return this;
      }
+
+     public updateSupplyApi(id): any{
+        //customize payload if necessary
+        this.id = id;
+        return this;
+    }
 }

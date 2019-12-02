@@ -124,14 +124,11 @@ export class EventDetailsComponent implements OnInit{
 
   removeShelter(shelter, contentDeleteConfirmation){
     this.shelter = shelter;
-    console.log("SHELTER == ", shelter);
-
     this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
       console.log(result);
       if(result){
-        console.log("KONFIRMO");
-        this.service.removeShelter(shelter.id).subscribe(() => {
-          console.log("Shelter deleted");
+          this.service.removeShelter(shelter.id).subscribe(() => {
+          this.router.navigate([window.location.origin+"/event-details/"+this.eventId]);
         }, error => {
           console.log("Shelter could not be deleted: ", error);
         })
@@ -144,16 +141,14 @@ export class EventDetailsComponent implements OnInit{
 
   removeSupply(supply, contentDeleteConfirmation){
     this.supply = supply;
-
     this.modalService.open(contentDeleteConfirmation, this.modalOptions).result.then((result) => {
       console.log(result);
       if(result){
-        console.log("KONFIRMO");
-        this.service.removeShelter(supply.id).subscribe(() => {
-          console.log("Shelter deleted");
-        }, error => {
-          console.log("Shelter could not be deleted: ", error);
-        })
+        this.service.removeSupply(supply.id).subscribe(() => {
+        this.router.navigate([window.location.origin+"/event-details/"+this.eventId]);
+      }, error => {
+        console.log("Shelter could not be deleted: ", error);
+      })
       } else {
         console.log("ANULLO");
       }
@@ -163,6 +158,10 @@ export class EventDetailsComponent implements OnInit{
 
   updateShelter(shelter){
     this.router.navigate([this.router.url+"/shelter-update/"+shelter.id]);
+  }
+
+  updateSupply(supply){
+    this.router.navigate([this.router.url+"/supply-update/"+supply.id]);
   }
 
 }

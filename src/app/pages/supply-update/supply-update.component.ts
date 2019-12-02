@@ -8,13 +8,13 @@ import { SupplyModel } from 'app/model/SupplyModel';
 import {SupplyStatus} from 'app/data/enums/SupplyStatus'
 
 @Component({
-    selector: 'supply-create',
+    selector: 'supply-update',
     moduleId: module.id,
-    templateUrl: 'supply-create.component.html',
-    styleUrls: [ './supply-create.component.css' ]
+    templateUrl: 'supply-update.component.html',
+    styleUrls: [ './supply-update.component.css' ]
 })
 
-export class SupplyCreateComponent implements OnInit{
+export class SupplyUpdateComponent implements OnInit{
   
 
   lat: number = 41.329121; 
@@ -22,6 +22,8 @@ export class SupplyCreateComponent implements OnInit{
   supplyForm: FormGroup;
   contactPersons: FormArray;
   eventId: string;
+  supplyId: string;
+  supply: any;
 
   constructor(private router: Router, 
     private _route: ActivatedRoute,
@@ -43,9 +45,54 @@ export class SupplyCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.supplyId = this._route.snapshot.paramMap.get("supplyId");
+    this.getSupplyDetails(this.supplyId);
+
     this.getRouteParameters();
     this.assignLatLngToForm();
+  }
 
+  getSupplyDetails(shelterId){
+    this._service.getSupplyById(shelterId).subscribe((data) => {
+      this.supply = data;
+      console.log(this.supply);
+      this.assignValuesToSupplyForm(this.supply);
+      this.patch(this.supply.contactPersons);
+    }, error => {
+      console.log("Error   ===   ", error);
+    })
+  }
+
+  assignValuesToSupplyForm(shelter){
+    console.log(shelter)
+    this.supplyForm = this.fb.group({
+      name: [shelter.name, Validators.required],
+      description: [shelter.description, Validators.required],
+      address: [shelter.address, Validators.required],
+      city: [shelter.city, Validators.required],
+      country: [shelter.country, Validators.required],
+      lat: [shelter.lat, Validators.required],
+      lng: [shelter.lng, Validators.required],
+      status: [shelter.status, Validators.required],
+      eventId: [shelter.eventId, Validators.required],
+      contactPersons: this.fb.array([])
+    });
+  }
+
+  patch(contactPersons) {
+    const control = <FormArray>this.supplyForm.get('contactPersons');
+    contactPersons.forEach(x => {
+      control.push(this.addExistingContact(x))
+    });
+  }
+
+  addExistingContact(contact): FormGroup {
+    return this.fb.group({
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      phone: contact.phone,
+      email: contact.email,
+    });
   }
 
   createContact(): FormGroup {
@@ -63,7 +110,7 @@ export class SupplyCreateComponent implements OnInit{
   }
 
   removeContact(){
-    if(this.contactPersons.length > 1){
+    if((this.supplyForm.get('contactPersons') as FormArray).length > 1){
       this.contactPersons = this.supplyForm.get('contactPersons') as FormArray;
       this.contactPersons.removeAt(this.contactPersons.length - 1);
     } else {
@@ -90,9 +137,10 @@ export class SupplyCreateComponent implements OnInit{
     console.log("FORM == ", this.supplyForm.value );
     var data = new SupplyModel(this.supplyForm.value as SupplyModel);
     console.log("FORM == ", data );
-    this._service.addSupply(data.toApiPayload()).subscribe((data) => {
+    this._service.updateSupply(data.updateSupplyApi(this.supplyId), this.supplyId).subscribe((data) => {
       this.router.navigate([window.location.origin+"/event-details/"+this.eventId]);
     }, error => {
+      alert("Ju nuk jeni i autorizuar per te fshire kete element!");
       console.log("ERROR  == ", error);
     })
   }

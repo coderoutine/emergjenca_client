@@ -63,6 +63,15 @@ export class EventsService  extends BaseService {
     return this._http.delete(this._sheltersApi+"/"+id);
   }
 
+  updateSupply(payload: any, supplyId: string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this._http.put(this._sheltersApi+"/"+supplyId, payload, httpOptions);
+  }
+
   addSupply(payload: any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -84,6 +93,10 @@ export class EventsService  extends BaseService {
   getShelterById(id: string){
       return this._http.get(`${this._sheltersApi}/${id}`);
   }
+
+  getSupplyById(id: string){
+    return this._http.get(`${this._suppliesApi}/${id}`);
+}
 
   getSupplies(filter: any){
     let queryStringFilter= this.queryFlattenerService.toQueryString(filter||{})

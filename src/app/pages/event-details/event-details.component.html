@@ -172,7 +172,7 @@
                   </td>
                   <td class="text-center">
                       <button class="btn btn-danger" (click)="removeSupply(supply, contentDeleteConfirmation)"><i class="fa fa-close"></i></button>
-                      <button class="btn btn-info"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-info" (click)="updateSupply(supply)"><i class="fa fa-pencil"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -237,14 +237,14 @@
         <ul class="list-unstyled team-members">
           <li>
             <div class="row">
-              <div class="col-md-12 col-12"> {{shelter.name}}<br>
+              <div class="col-md-12 col-12"> {{supply.name}}<br>
                 <span class="text-muted">
-                <small>{{shelter.city}}, {{shelter.country}}</small></span>
+                <small>{{supply.city}}, {{supply.country}}</small></span>
               </div>
               <br>
               <hr>
               <div class="col-md-12 col-12">
-                <p>{{shelter.description}}</p>
+                <p>{{supply.description}}</p>
               </div>
             </div>
           </li>

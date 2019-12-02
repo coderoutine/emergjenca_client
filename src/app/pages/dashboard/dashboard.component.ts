@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit{
     this.notificationService.onNotify(data=>this.loadData())
     this.loadData();
   }
+  
   loadData(): void {
     this._service.getRelevantEvents().subscribe((data: any) => {
       console.log("DATA   ===  ", data);
