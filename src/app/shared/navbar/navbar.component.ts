@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit{
               return this.listTitles[item].title;
           }
       }
-      return 'Faqja Kryesore';
+      return 'Kordinim Emergjence';
     }
     sidebarToggle() {
         if (this.sidebarVisible === false) {

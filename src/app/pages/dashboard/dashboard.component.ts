@@ -24,24 +24,29 @@ export class DashboardComponent implements OnInit{
     this.loadData();
   }
   loadData(): void {
-    this._service.getAllEvents().subscribe((data: any) => {
+    this._service.getRelevantEvents().subscribe((data: any) => {
       console.log("DATA   ===  ", data);
-      this.events = data;
+     this.handleEventData(data)
 
     }, error => {
       console.log("ERROR   ===  ", error);
       this.events = [];
     })
   }
+  handleEventData(data:any[]){
+    switch(data.length){
+      case 0 : alert('navigate to a page where it shows that there are not events');
+      break;
+      case 1 : this.details(data[0].id);
+      break;
+      default : break;
+    }
+    this.events = data;
+  }
+  
   details(id: string){
     this.router.navigate(["event-details/"+id])
   }
 
-  get verifiedEvents(){
-    return this.events.filter(n => n.verified == true).length;
-  }
 
-  get nonVerifiedEvents(){
-    return this.events.filter(n => n.verified == false).length;
-  }
 }

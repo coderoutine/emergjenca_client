@@ -1,46 +1,3 @@
-<div class="row">
-  <div class="col-lg-3col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-support-17 text-warning"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Te pa-verifikuara</p>
-              <p class="card-title">{{nonVerifiedEvents}}
-                <p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- 
-  <div class="col-lg-3col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-check-2 text-primary"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Te verifikuara</p>
-              <p class="card-title">{{verifiedEvents}}
-                <p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -49,7 +6,6 @@
     <div class="col-md-6" *ngFor="let event of events" (click)="details(event.id)">
       <div class="card card-user">
         <div class="image">
-          <!-- <img src="assets/img/damir-bosnjak.jpg" alt="..."> -->
         </div>
         <div class="card-body">
           <div class="author">
