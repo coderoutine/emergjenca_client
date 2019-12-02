@@ -5,6 +5,7 @@ import { Location} from '@angular/common';
 import { AuthorizeService } from 'app/api-authorization/authorize.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
     moduleId: module.id,
@@ -53,6 +54,11 @@ export class NavbarComponent implements OnInit{
       }
       return 'Kordinim Emergjence';
     }
+
+    redirect(){
+      this.router.navigate([window.location.origin]);
+    }
+
     sidebarToggle() {
         if (this.sidebarVisible === false) {
             this.sidebarOpen();
