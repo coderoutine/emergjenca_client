@@ -62,9 +62,11 @@ export class EventDetailsComponent implements OnInit{
       this.shelters = data;
       this.showShelters = true;
       this.showSafetyZones = false;
+      this.showSupplies = false;
     }, error => {
       this.showShelters = false;
       this.showSafetyZones = false;
+      this.showSupplies = false;
     })
   }
 
@@ -74,9 +76,11 @@ export class EventDetailsComponent implements OnInit{
       this.shelters = data;
       this.showSafetyZones = true;
       this.showShelters = false;
+      this.showSupplies = false;
     }, error => {
       this.showSafetyZones = false;
       this.showShelters = false;
+      this.showSupplies = false;
     });
   }
 

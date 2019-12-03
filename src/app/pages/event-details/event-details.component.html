@@ -106,8 +106,9 @@
                     Shfaq
                   </td>
                   <td class="text-center">
-                      <button class="btn btn-danger" (click)="removeShelter(shelter, contentDeleteConfirmationShelter)"><i class="fa fa-close"></i></button>
-                      <button class="btn btn-info" (click)="updateShelter(shelter)"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger" *ngIf="shelter.canDelete" (click)="removeShelter(shelter, contentDeleteConfirmationShelter)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-info" *ngIf="shelter.canEdit" (click)="updateShelter(shelter)"><i class="fa fa-pencil"></i></button>
+                      <span *ngIf="!shelter.canEdit && !shelter.canDelete">-</span>
                   </td>
               </tbody>
           </table>
@@ -171,8 +172,9 @@
                     <a>Shfaq</a> 
                   </td>
                   <td class="text-center">
-                      <button class="btn btn-danger" (click)="removeSupply(supply, contentDeleteConfirmationSupply)"><i class="fa fa-close"></i></button>
-                      <button class="btn btn-info" (click)="updateSupply(supply)"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger"  *ngIf="supply.canDelete" (click)="removeSupply(supply, contentDeleteConfirmationSupply)"><i class="fa fa-close"></i></button>
+                      <button class="btn btn-info"  *ngIf="supply.canEdit" (click)="updateSupply(supply)"><i class="fa fa-pencil"></i></button>
+                      <span *ngIf="!supply.canEdit && !supply.canDelete">-</span>
                   </td>
                 </tr>
               </tbody>
@@ -183,7 +185,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="!showSupplies && !showShelters">
+<div class="row" *ngIf="!showSupplies && !showShelters && !showSafetyZones">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header ">
